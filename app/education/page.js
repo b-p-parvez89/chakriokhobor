@@ -1,0 +1,2 @@
+import Link from 'next/link'; import {api,fmtDate} from '../../lib/api'; export const metadata={title:'শিক্ষা'};
+export default async function Education(){const d=await api('/education').then(x=>x.data).catch(()=>[]);return <section className="section"><div className="container"><h1>শিক্ষা</h1><div className="grid3">{d.map(x=><Link className="card" key={x._id} href={`/education/${encodeURIComponent(x.slug)}`}><span className="tag">{x.category}</span><h2>{x.title}</h2><p className="muted">{x.excerpt}</p><small>{fmtDate(x.publishedAt)}</small></Link>)}</div></div></section>}
