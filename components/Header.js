@@ -32,7 +32,7 @@ export default function Header() {
               {t}
             </Link>
           ))}
-          {user ? (
+          {/* {user ? (
             <Link
               href={user.role === "admin" ? "/admin" : "/dashboard"}
               className="accountLink"
@@ -43,7 +43,7 @@ export default function Header() {
             <Link href="/login" className="accountLink">
               Login
             </Link>
-          )}
+          )} */}
         </nav>
       </div>
     </header>
