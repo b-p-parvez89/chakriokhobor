@@ -138,7 +138,6 @@ export async function generateMetadata() {
     },
   };
 }
-
 export default async function Layout({ children }) {
   const s = await getSiteSettings();
 
@@ -149,6 +148,13 @@ export default async function Layout({ children }) {
 
   return (
     <html lang="bn">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="CyA3s9l-8ytydcsQZ4-hwvMNU-yuLi6pzjdpIKYqDDE"
+        />
+      </head>
+
       <body>
         <Header />
 
