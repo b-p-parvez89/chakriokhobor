@@ -1,4 +1,6 @@
+```jsx
 import './globals.css';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AdSense from '../components/AdSense';
@@ -17,6 +19,7 @@ async function getSiteSettings() {
     if (!res.ok) return {};
 
     const json = await res.json();
+
     return json?.data || {};
   } catch {
     return {};
@@ -26,16 +29,18 @@ async function getSiteSettings() {
 export async function generateMetadata() {
   const s = await getSiteSettings();
 
-  // Cloudflare/Vercel-এ variable না থাকলেও fallback থাকবে
   const base =
-    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    'http://localhost:3000';
 
   return {
     metadataBase: new URL(base),
 
     title: {
       default:
-        s.siteTitle || 'ChakriOKhobor | চাকরি, শিক্ষা ও খবর',
+        s.siteTitle ||
+        'ChakriOKhobor | চাকরি, শিক্ষা ও খবর',
+
       template: '%s | ChakriOKhobor',
     },
 
@@ -72,12 +77,23 @@ export async function generateMetadata() {
         'বাংলাদেশের চাকরি, শিক্ষা ও গুরুত্বপূর্ণ খবরের প্ল্যাটফর্ম।',
 
       type: 'website',
+
+      url: s.canonical || base,
+
+      siteName:
+        s.siteTitle ||
+        'ChakriOKhobor',
     },
   };
 }
 
 export default async function Layout({ children }) {
   const s = await getSiteSettings();
+
+  const showAds =
+    s.adsenseEnabled &&
+    s.adsenseClient &&
+    s.adsenseSlot;
 
   return (
     <html lang="bn">
@@ -86,19 +102,18 @@ export default async function Layout({ children }) {
 
         <main>{children}</main>
 
-        {s.adsenseEnabled &&
-          s.adsenseClient &&
-          s.adsenseSlot && (
-            <div className="container adWrap">
-              <AdSense
-                client={s.adsenseClient}
-                slot={s.adsenseSlot}
-              />
-            </div>
-          )}
+        {showAds && (
+          <div className="container adWrap">
+            <AdSense
+              client={s.adsenseClient}
+              slot={s.adsenseSlot}
+            />
+          </div>
+        )}
 
         <Footer />
       </body>
     </html>
   );
 }
+```
