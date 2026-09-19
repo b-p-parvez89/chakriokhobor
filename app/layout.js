@@ -66,6 +66,12 @@ export async function generateMetadata() {
 
     keywords,
 
+    // Google Search Console Verification
+    verification: {
+      google:
+        'CyA3s9l-8ytydcsQZ4-hwvMNU-yuLi6pzjdpIKYqDDE',
+    },
+
     authors: [
       {
         name: 'ChakriOKhobor',
@@ -83,6 +89,7 @@ export async function generateMetadata() {
     robots: {
       index: true,
       follow: true,
+
       googleBot: {
         index: true,
         follow: true,
@@ -94,8 +101,11 @@ export async function generateMetadata() {
 
     openGraph: {
       type: 'website',
+
       locale: 'bn_BD',
+
       url: canonical,
+
       siteName: 'ChakriOKhobor',
 
       title: siteTitle,
@@ -114,8 +124,11 @@ export async function generateMetadata() {
 
     twitter: {
       card: 'summary_large_image',
+
       title: siteTitle,
+
       description: siteDescription,
+
       images: [`${SITE_URL}/og-image.jpg`],
     },
 
