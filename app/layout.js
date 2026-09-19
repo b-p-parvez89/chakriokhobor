@@ -1,4 +1,4 @@
-```jsx
+```javascript
 import './globals.css';
 
 import Header from '../components/Header';
@@ -16,12 +16,14 @@ async function getSiteSettings() {
       cache: 'no-store',
     });
 
-    if (!res.ok) return {};
+    if (!res.ok) {
+      return {};
+    }
 
     const json = await res.json();
 
     return json?.data || {};
-  } catch {
+  } catch (error) {
     return {};
   }
 }
